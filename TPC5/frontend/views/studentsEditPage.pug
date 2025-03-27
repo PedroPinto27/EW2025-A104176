@@ -1,0 +1,58 @@
+extends layout
+
+block content
+    .container
+        .form-card
+            header.form-header
+                h2 Editar Estudante
+            form#editarEstudante.form-body(method="POST")
+                fieldset.student-info
+                    legend
+                        b Informações do Estudante
+                    label
+                        b ID
+                    input.input-field(type="text" name="id" value=a._id readonly)
+                    label
+                        b Nome
+                    input.input-field(type="text" name="nome" value=a.nome required)
+                    label
+                        b GitHub
+                    input.input-field(type="text" name="git" value=a.git required)
+                fieldset.homework-info
+                    legend
+                        b Trabalhos de Casa (TPCs)
+                    .homework-checks
+                        .half-column
+                            - for (let i = 1; i <= 4; i++)
+                                - let tpc = "tpc" + i
+                                label
+                                    input.checkbox(type="checkbox" name=`tpc${i}` value="1" checked=a[tpc] === "1")
+                                    | TPC#{i}
+                                br
+                        .half-column
+                            - for (let i = 5; i <= 8; i++)
+                                - let tpc = "tpc" + i
+                                label
+                                    input.checkbox(type="checkbox" name=`tpc${i}` value="1" checked=a[tpc] === "1")
+                                    | TPC#{i}
+                                br
+                .submit-button-container
+                    button.submit-button(type="submit") Guardar Alterações
+
+    script.
+        document.getElementById('editarEstudante').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            for (let i = 1; i <= 8; i++) {
+                const checkbox = document.querySelector(`input[name="tpc${i}"]`);
+                if (!checkbox.checked) {
+                    const hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = `tpc${i}`;
+                    hiddenInput.value = '0';
+                    this.appendChild(hiddenInput);
+                }
+            }
+
+            this.submit();
+        });

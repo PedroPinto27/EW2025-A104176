@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    .container
+        header.page-header
+            h1
+                span Students List
+                a.add-button(href='/alunos/registo') +
+        
+        .table-container
+            table.student-table
+                tr
+                    th ID
+                    th Nome
+                    th GitHub
+                    th Ações
+                each aluno in slist
+                    tr
+                        td= aluno._id
+                        td
+                            a.student-name(href="/alunos/" + aluno._id)= aluno.nome
+                        td= aluno.git
+                        td
+                            span.action-buttons
+                                a.edit-button(href="/alunos/edit/" + aluno._id) Edit
+                                a.delete-button(href="/alunos/delete/" + aluno._id) Delete

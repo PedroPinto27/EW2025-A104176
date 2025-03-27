@@ -1,0 +1,50 @@
+extends layout
+
+block content
+    .container
+        .form-card
+            header.form-header
+                h2 Formulário de Estudante
+            form.student-form(method="POST")
+                fieldset.student-info
+                    legend
+                        b Informações do Estudante
+                    label
+                        b ID
+                    input.input-field(type="text" name="id" required)
+                    label
+                        b Nome
+                    input.input-field(type="text" name="nome" required)
+                    label
+                        b GitHub
+                    input.input-field(type="text" name="git" required)
+                fieldset.homework-info
+                    legend
+                        b Trabalhos de Casa (TPCs)
+                    .homework-checks
+                        .half-column
+                            input.checkbox(type="checkbox" name="tpc1" value="1")
+                            label TPC1
+                            br
+                            input.checkbox(type="checkbox" name="tpc2" value="1")
+                            label TPC2
+                            br
+                            input.checkbox(type="checkbox" name="tpc3" value="1")
+                            label TPC3
+                            br
+                            input.checkbox(type="checkbox" name="tpc4" value="1")
+                            label TPC4
+                        .half-column
+                            input.checkbox(type="checkbox" name="tpc5" value="1")
+                            label TPC5
+                            br
+                            input.checkbox(type="checkbox" name="tpc6" value="1")
+                            label TPC6
+                            br
+                            input.checkbox(type="checkbox" name="tpc7" value="1")
+                            label TPC7
+                            br
+                            input.checkbox(type="checkbox" name="tpc8" value="1")
+                            label TPC8
+                .submit-button-container
+                    button.submit-button(type="submit") Registar
