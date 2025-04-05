@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  .w3-container.w3-margin-top
+    .w3-card.w3-padding
+      h2.w3-blue.w3-padding Lista de Contratos
+
+      if contratos.length
+        .w3-responsive
+          table.w3-table-all.w3-hoverable.w3-striped
+            thead
+              tr.w3-light-grey
+                th ID
+                th Entidade
+                th Tipo
+                th Objeto
+                th Data
+                th Preço
+            tbody
+              each contrato in contratos
+                tr
+                  td
+                    a(href=`/contratos/${contrato._id}` class="w3-text-blue") #{contrato._id}
+                  td #{contrato.entidade_comunicante}
+                  td #{contrato.tipoprocedimento}
+                  td #{contrato.objectoContrato}
+                  td #{contrato.dataCelebracaoContrato}
+                  td #{contrato.precoContratual.toFixed(2)} €
+      else
+        .w3-panel.w3-red.w3-padding
+          h4 Nenhum contrato encontrado.
+
+      .w3-margin-top
+        a(href="/contratos/entidades/lista" class="w3-button w3-blue w3-round") Ver Entidades

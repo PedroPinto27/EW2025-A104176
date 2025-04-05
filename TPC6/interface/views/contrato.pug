@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  .w3-container.w3-margin-top
+    .w3-card.w3-padding
+      h2.w3-blue.w3-padding Detalhes do Contrato
+
+      p
+        b ID:
+        | #{contrato._id || 'N/A'}
+
+      p
+        b Entidade:
+        | #{contrato.entidade_comunicante || 'N/A'}
+
+      p
+        b Tipo de Procedimento:
+        | #{contrato.tipoprocedimento || 'N/A'}
+
+      p
+        b Objeto:
+        | #{contrato.objectoContrato || 'N/A'}
+
+      p
+        b Data de Celebração:
+        | #{contrato.dataCelebracaoContrato || 'N/A'}
+
+      p
+        b Preço Contratual:
+        if contrato.precoContratual
+          | #{Number(contrato.precoContratual).toFixed(2)} €
+        else
+          | Não disponível
+
+      .w3-margin-top
+        a(href="/contratos" class="w3-button w3-blue w3-round") Voltar à Lista
