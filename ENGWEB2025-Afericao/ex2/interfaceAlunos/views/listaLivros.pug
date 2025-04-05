@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  .w3-container.w3-margin-top
+    .w3-card-4.w3-padding-large
+      header.w3-container.w3-blue
+        h2
+          i(class="w3-margin-right fa fa-book") Lista de Livros
+      
+      if livros.length
+        .w3-responsive
+          table.w3-table-all.w3-hoverable.w3-striped
+            thead
+              tr.w3-light-grey
+                th ID
+                th Título
+                th Autor
+                th Data de Publicação
+                th Páginas
+            tbody
+              each livro in livros
+                tr
+                  td
+                    a(href=`/${livro._id}` class="w3-text-blue") #{livro._id}
+                  td.w3-text-dark-grey #{livro.title}
+                  td
+                    each autor, i in livro.author
+                      a(href=`/entidades/${autor._id}` class="w3-text-indigo") #{autor.name}
+                      if i < livro.author.length - 1
+                        | , 
+                  td #{livro.publishDate}
+                  td #{livro.pages}
+      else
+        .w3-panel.w3-red.w3-padding-16.w3-center
+          h3
+            i(class="fa fa-exclamation-triangle w3-margin-right") Nenhum livro disponível no momento.

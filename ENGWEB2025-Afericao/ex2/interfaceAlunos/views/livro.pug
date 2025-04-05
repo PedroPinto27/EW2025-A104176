@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  .w3-container.w3-margin-top
+    .w3-card-4
+      header.w3-container.w3-blue
+        h2
+          i(class="fa fa-book w3-margin-right") #{livro.title}
+
+      .w3-container.w3-padding-16
+        if livro.coverImg
+          .w3-center.w3-margin
+            img(src=livro.coverImg alt="Capa do livro" class="w3-image" style="max-height:300px")
+
+        h3
+          i(class="fa fa-user w3-margin-right") Autor(es)
+        p.w3-text-indigo
+          each autor, i in livro.author
+            a(href=`/autor/${autor._id}` class="w3-text-indigo") #{autor.name}
+            if i < livro.author.length - 1
+              | , 
+
+        h3
+          i(class="fa fa-align-left w3-margin-right") Descrição
+        if livro.description
+          p.w3-text-dark-grey #{livro.description}
+        else
+          p.w3-text-red Não existe descrição disponível.
+
+        h3
+          i(class="fa fa-info-circle w3-margin-right") Detalhes
+        ul.w3-ul
+          li  Páginas: #{livro.pages}
+          li  Formato: #{livro.bookFormat}
+          li  Editora: #{livro.publisher}
+          li  Publicado em: #{livro.publishDate}
+          li  Idioma: #{livro.language}
+          li  Preço: #{livro.price || "N/A"}
+
+        .w3-margin-top
+          a(href='/' class="w3-button w3-blue w3-round") Voltar à Lista

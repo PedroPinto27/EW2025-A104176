@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  .w3-container.w3-margin-top
+    .w3-card-4.w3-padding-large
+      header.w3-container.w3-blue
+        h2
+          i(class="fa fa-user w3-margin-right")
+          | Autor: #{autor.name} (#{autor._id})
+
+      .w3-panel.w3-pale-blue.w3-leftbar.w3-border-blue.w3-margin-top
+        h3
+          i(class="fa fa-book w3-margin-right")
+          | Total de Livros Publicados: #{total}
+
+      if livros.length
+        .w3-responsive
+          table.w3-table-all.w3-hoverable.w3-striped.w3-margin-top
+            thead
+              tr.w3-light-grey
+                th ID
+                th Título
+                th Autor
+                th Data de Publicação
+                th Páginas
+            tbody
+              each livro in livros
+                tr
+                  td
+                    a(href=`/${livro._id}` class="w3-text-blue") #{livro._id}
+                  td.w3-text-dark-grey #{livro.title}
+                  td
+                    each autor, i in livro.author
+                      a(href=`/entidades/${autor._id}` class="w3-text-indigo") #{autor.name}
+                      if i < livro.author.length - 1
+                        | , 
+                  td #{livro.publishDate}
+                  td #{livro.pages}
+      else
+        .w3-panel.w3-red.w3-center.w3-padding.w3-margin-top
+          h4
+            i(class="fa fa-exclamation-triangle w3-margin-right")
+            | Nenhum livro encontrado para este autor.
+
+      .w3-margin-top
+        a(href='/' class="w3-button w3-blue w3-round")
+          i(class="fa fa-arrow-left w3-margin-right")
+          | Voltar à Lista
